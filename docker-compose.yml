@@ -1,0 +1,51 @@
+version: "3.9"
+
+services:
+  node1:
+    build: .
+    container_name: raft-node1
+    environment:
+      - NODE_ID=node1
+      - HTTP_PORT=3001
+      - PEER_URLS=http://node2:3002,http://node3:3003
+      - WAL_DIR=/app/data
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./data/node1:/app/data
+    networks:
+      - raft-network
+
+  node2:
+    build: .
+    container_name: raft-node2
+    environment:
+      - NODE_ID=node2
+      - HTTP_PORT=3002
+      - PEER_URLS=http://node1:3001,http://node3:3003
+      - WAL_DIR=/app/data
+    ports:
+      - "3002:3002"
+    volumes:
+      - ./data/node2:/app/data
+    networks:
+      - raft-network
+
+  node3:
+    build: .
+    container_name: raft-node3
+    environment:
+      - NODE_ID=node3
+      - HTTP_PORT=3003
+      - PEER_URLS=http://node1:3001,http://node2:3002
+      - WAL_DIR=/app/data
+    ports:
+      - "3003:3003"
+    volumes:
+      - ./data/node3:/app/data
+    networks:
+      - raft-network
+
+networks:
+  raft-network:
+    driver: bridge

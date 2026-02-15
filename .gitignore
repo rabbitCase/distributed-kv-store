@@ -1,0 +1,12 @@
+node_modules/
+dist/
+data/
+*.log
+.env
+.DS_Store
+temp.md
+ex.md
+quickstart.md
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
