@@ -1,6 +1,5 @@
 #!/bin/bash
-
-BASE_URL="http://localhost:3001"
+#AI generated test script which checks cluster/node status and WRITES/READS sample keys
 
 echo "=== Testing Distributed KV Store ==="
 echo ""
